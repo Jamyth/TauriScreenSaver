@@ -5,8 +5,8 @@
     "scripts": {
         "run-script": "ts-node --project config/tsconfig.script.json",
         "format": "yarn run-script script/format.ts",
-        "start": "yarn run-script script/start.ts",
-        "build": "yarn run-script script/build.ts",
+        "start": "yarn tauri dev",
+        "build": "yarn tauri build",
         "module": "yarn run-script script/module.ts"
     },
     "devDependencies": {

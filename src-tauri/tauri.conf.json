@@ -1,8 +1,8 @@
 {
     "$schema": "../node_modules/@tauri-apps/cli/schema.json",
     "build": {
-        "beforeBuildCommand": "",
-        "beforeDevCommand": "yarn start",
+        "beforeBuildCommand": "yarn run-script script/build.ts",
+        "beforeDevCommand": "yarn run-script script/start.ts",
         "devPath": "http://localhost:8080/",
         "distDir": "../build"
     },
@@ -29,7 +29,7 @@
                 "icons/icon.icns",
                 "icons/icon.ico"
             ],
-            "identifier": "com.tauri.dev",
+            "identifier": "com.jamyth.screensaver",
             "longDescription": "",
             "macOS": {
                 "entitlements": null,

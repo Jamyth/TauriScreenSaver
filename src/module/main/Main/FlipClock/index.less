@@ -1,7 +1,11 @@
 .g-screen-saver-base.flip-clock {
     flex-direction: row;
     column-gap: 2rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    cursor: default;
 
     > .meridiem {
         width: 10%;
@@ -11,6 +15,7 @@
         justify-content: flex-end;
         font-size: 4rem;
         height: 50%;
+        user-select: none;
     }
 
     > .flipping-text {
