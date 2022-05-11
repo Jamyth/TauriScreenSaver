@@ -1,0 +1,39 @@
+.g-tab {
+    display: flex;
+    height: 100%;
+
+    > .tabs {
+        height: 100%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(255 255 255 / 30%);
+
+        > button {
+            line-height: 60px;
+            margin: 0;
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            color: white;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(255 255 255 / 30%);
+            transition: all 0.15s ease-in-out;
+
+            &.active {
+                background-color: white;
+                color: black;
+            }
+
+            &:not(.active):hover {
+                background-color: rgba(255 255 255 / 20%);
+            }
+        }
+    }
+
+    > .tab-content {
+        flex: 1;
+        padding: 1rem;
+    }
+}

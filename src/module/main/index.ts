@@ -1,14 +1,26 @@
 import { Module, register } from "react-shiba";
 import { Main } from "./Main";
-import type { State, Path } from "./type";
+import { StorageUtil } from "util/StorageUtil";
+import type { State, Path, ScreenSaverType } from "./type";
 
 const initialState: State = {
     selectedScreenSaver: "flip-clock",
+    showSetting: false,
 };
 
 class ModuleMainModule extends Module<Path, State> {
     override onEnter() {
-        // TODO
+        const screenSaverType = StorageUtil.getScreensaverType();
+        this.setState({ selectedScreenSaver: screenSaverType });
+    }
+
+    toggleSetting() {
+        this.setState((state) => (state.showSetting = !state.showSetting));
+    }
+
+    changeScreenSaver(type: ScreenSaverType) {
+        this.setState((state) => (state.selectedScreenSaver = type));
+        StorageUtil.setScreensaverType(type);
     }
 }
 

@@ -1,3 +1,7 @@
 export type Path = never;
 
-export interface State {}
+export type Tab = "default";
+
+export interface State {
+    tab: Tab;
+}

@@ -8,6 +8,7 @@ interface Props {
 export const FlippingText = React.memo(({ digit, nextDigit }: Props) => {
     const [hasAnimation, setHasAnimation] = React.useState(false);
     const [currentValue, setCurrentValue] = React.useState(digit);
+    const didMountRef = React.useRef(false);
 
     const onAnimationEnd = () => {
         setHasAnimation(false);
@@ -15,8 +16,15 @@ export const FlippingText = React.memo(({ digit, nextDigit }: Props) => {
     };
 
     React.useEffect(() => {
+        if (!didMountRef.current) {
+            return;
+        }
         setHasAnimation(true);
     }, [digit]);
+
+    React.useEffect(() => {
+        didMountRef.current = true;
+    }, []);
 
     return (
         <div className="flipping-text">

@@ -1,4 +1,5 @@
 import { FlipClock } from "./Main/FlipClock";
+import { ScrollClock } from "./Main/ScrollClock";
 import type { ScreenSaverType } from "./type";
 import type React from "react";
 
@@ -7,6 +8,8 @@ function getSelectedScreenSaver(type: ScreenSaverType): React.ComponentType {
     switch (type) {
         case "flip-clock":
             return FlipClock;
+        case "scroll-clock":
+            return ScrollClock;
     }
 }
 
