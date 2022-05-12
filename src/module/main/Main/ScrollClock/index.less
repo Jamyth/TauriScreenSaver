@@ -1,0 +1,74 @@
+.g-screen-saver-base.scroll-clock {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    column-gap: 3%;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &.blink {
+        > span {
+            animation: blink 800ms linear;
+            animation-iteration-count: infinite;
+
+            @keyframes blink {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    > span {
+        font-size: 20rem * 0.4;
+    }
+
+    > .scroll-container {
+        width: 20rem;
+        height: 20rem;
+        background-color: #1f1f1f;
+        font-size: 20rem * 0.6;
+        line-height: 20rem;
+        border-radius: 20px;
+        overflow: hidden;
+        will-change: transform;
+
+        > .scrolling {
+            height: 9999px;
+            transition-property: transform;
+            transition-timing-function: ease-in-out;
+            transform: translateY(-20rem);
+
+            > .digit {
+                width: 20rem;
+                height: 20rem;
+                line-height: inherit;
+                text-align: center;
+            }
+        }
+
+        &.small {
+            width: 10rem;
+            height: 10rem;
+            font-size: 10rem * 0.5;
+            line-height: 10rem;
+
+            > .scrolling {
+                transform: translateY(-10rem);
+
+                > .digit {
+                    width: 10rem;
+                    height: 10rem;
+                }
+            }
+        }
+    }
+}

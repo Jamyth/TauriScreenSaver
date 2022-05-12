@@ -1,8 +1,10 @@
 import React from "react";
 import { Row } from "component/Row";
 import { actions as mainActions } from "module/main";
-import type { ScreenSaverType } from "module/main/type";
 import { useModuleMainState } from "module/main/hooks";
+import { Select } from "component/Select";
+import { ScrollClockSetting } from "./ScrollClockSetting";
+import type { ScreenSaverType } from "module/main/type";
 
 const options: ScreenSaverType[] = ["flip-clock", "scroll-clock"];
 const translation: Record<ScreenSaverType, string> = {
@@ -12,22 +14,18 @@ const translation: Record<ScreenSaverType, string> = {
 
 export const General = React.memo(() => {
     const screenSaverType = useModuleMainState((state) => state.selectedScreenSaver);
-    const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = e.target.value as ScreenSaverType;
-        mainActions.changeScreenSaver(value);
-    };
 
     return (
         <div className="container">
             <Row label="Theme">
-                <select onChange={onSelectChange} value={screenSaverType}>
-                    {options.map((type) => (
-                        <option value={type} key={type}>
-                            {translation[type]}
-                        </option>
-                    ))}
-                </select>
+                <Select
+                    onChange={mainActions.changeScreenSaver}
+                    value={screenSaverType}
+                    list={options}
+                    translator={(_) => translation[_]}
+                />
             </Row>
+            {screenSaverType === "scroll-clock" && <ScrollClockSetting />}
         </div>
     );
 });
