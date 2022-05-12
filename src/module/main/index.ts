@@ -2,6 +2,7 @@ import { Module, register } from "react-shiba";
 import { Main } from "./Main";
 import { StorageUtil } from "util/StorageUtil";
 import { SettingUtil } from "util/SettingUtil";
+import { block, NoSleepType, unblock } from "tauri-plugin-nosleep-api";
 import type { ScreenSaverSetting } from "util/SettingUtil";
 import type { State, Path, ScreenSaverType } from "./type";
 import { ObjectUtil } from "@iamyth/util";
@@ -14,9 +15,14 @@ const initialState: State = {
 
 class ModuleMainModule extends Module<Path, State> {
     override onEnter() {
+        block(NoSleepType.PreventUserIdleSystemSleep);
         const screenSaverType = StorageUtil.getScreensaverType();
         const setting = SettingUtil.load();
         this.setState({ selectedScreenSaver: screenSaverType, setting });
+    }
+
+    override onDestroy(): void {
+        unblock();
     }
 
     toggleSetting() {

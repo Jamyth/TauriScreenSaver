@@ -7,7 +7,7 @@
         "distDir": "../build"
     },
     "package": {
-        "productName": "screen-saver",
+        "productName": "Iamyth Screensaver",
         "version": "0.1.0"
     },
     "tauri": {

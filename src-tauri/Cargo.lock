@@ -61,6 +61,7 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tauri-plugin-nosleep",
 ]
 
 [[package]]
@@ -613,6 +614,12 @@ name = "dispatch"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
+
+[[package]]
+name = "doc-comment"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fea41bba32d969b513997752735605054bc0dfa92b4c56bf1189f2e174be7a10"
 
 [[package]]
 name = "dtoa"
@@ -1592,6 +1599,63 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72ef4a56884ca558e5ddb05a1d1e7e1bfd9a68d9ed024c21704cc98872dae1bb"
 
 [[package]]
+name = "nosleep"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "39ccc743d4e45c324fb1e51a05d65163adc1b6107d1aade56b824e2b0b171b9f"
+dependencies = [
+ "nosleep-mac-sys",
+ "nosleep-nix",
+ "nosleep-types",
+ "nosleep-windows",
+]
+
+[[package]]
+name = "nosleep-mac-sys"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "39321f141428198a9d1eaf4d1a46f5b75289eae07eafd6a79bedac8719aa6aa0"
+dependencies = [
+ "cc",
+ "nosleep-types",
+ "objc-foundation",
+ "objc_id",
+ "snafu",
+]
+
+[[package]]
+name = "nosleep-nix"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "043549d9abed46335c089fb24ab9555e59cef69ec29cdbd0501347cfef9f0c74"
+dependencies = [
+ "dbus",
+ "nosleep-types",
+ "snafu",
+]
+
+[[package]]
+name = "nosleep-types"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d198d783f9d16e7d6e1fb4f6181706ed811159172f0536eb1173553fc5fb1b85"
+dependencies = [
+ "serde",
+ "snafu",
+]
+
+[[package]]
+name = "nosleep-windows"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd9846ad2192531849e757e6cf1daddbe71eebb38e459d4c5d85dd445eb68b8b"
+dependencies = [
+ "nosleep-types",
+ "snafu",
+ "windows 0.36.1",
+]
+
+[[package]]
 name = "notify-rust"
 version = "4.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2567,6 +2631,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2dd574626839106c320a323308629dcb1acfc96e32a8cba364ddc61ac23ee83"
 
 [[package]]
+name = "snafu"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5177903bf45656592d9eb5c0e22f408fc023aae51dbe2088889b71633ba451f2"
+dependencies = [
+ "doc-comment",
+ "snafu-derive",
+]
+
+[[package]]
+name = "snafu-derive"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "410b26ed97440d90ced3e2488c868d56a86e2064f5d7d6f417909b286afe25e5"
+dependencies = [
+ "heck 0.4.0",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "soup2-sys"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2893,6 +2979,18 @@ dependencies = [
  "syn",
  "tauri-codegen",
  "tauri-utils",
+]
+
+[[package]]
+name = "tauri-plugin-nosleep"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e1677b71abd4d5bd3d69d54a9a368ff22da14de7ecd12af04bf9cfc600b26823"
+dependencies = [
+ "nosleep",
+ "serde",
+ "tauri",
+ "thiserror",
 ]
 
 [[package]]
@@ -3500,6 +3598,19 @@ dependencies = [
  "windows_i686_msvc 0.35.0",
  "windows_x86_64_gnu 0.35.0",
  "windows_x86_64_msvc 0.35.0",
+]
+
+[[package]]
+name = "windows"
+version = "0.36.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e53b97a83176b369b0eb2fd8158d4ae215357d02df9d40c1e1bf1879c5482c80"
+dependencies = [
+ "windows_aarch64_msvc 0.36.1",
+ "windows_i686_gnu 0.36.1",
+ "windows_i686_msvc 0.36.1",
+ "windows_x86_64_gnu 0.36.1",
+ "windows_x86_64_msvc 0.36.1",
 ]
 
 [[package]]
