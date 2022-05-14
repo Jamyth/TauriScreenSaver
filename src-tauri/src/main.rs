@@ -6,7 +6,7 @@
 use tauri::{Submenu, Menu, MenuItem};
 
 fn main() {
-  let menu = Menu::new().add_submenu(Submenu::new("appname", Menu::new().add_native_item(MenuItem::Quit)));
+  let menu = Menu::new().add_submenu(Submenu::new("Iamyth Screensaver", Menu::new().add_native_item(MenuItem::Quit)));
   tauri::Builder::default()
     // .invoke_handler(tauri::generate_handler!())
     .menu(menu)
