@@ -1,46 +1,57 @@
 import React from "react";
 
+type Size = "small" | "medium";
+
 interface Props {
     digit: string;
-    nextDigit: string;
+    size?: Size;
 }
 
-export const FlippingText = React.memo(({ digit, nextDigit }: Props) => {
-    const [hasAnimation, setHasAnimation] = React.useState(false);
+export const FlippingText = React.memo(({ digit, size = "medium" }: Props) => {
     const [currentValue, setCurrentValue] = React.useState(digit);
-    const didMountRef = React.useRef(false);
+    const [isAnimating, setIsAnimating] = React.useState(false);
 
-    const onAnimationEnd = () => {
-        setHasAnimation(false);
-        setCurrentValue(nextDigit);
+    const onTransitionEnd = () => {
+        setIsAnimating(false);
+        setCurrentValue(digit);
     };
 
     React.useEffect(() => {
-        if (!didMountRef.current) {
-            return;
+        if (currentValue !== digit) {
+            setIsAnimating(true);
         }
-        setHasAnimation(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- only listen to props
     }, [digit]);
 
-    React.useEffect(() => {
-        didMountRef.current = true;
-    }, []);
+    const textStyle: React.CSSProperties =
+        size === "medium"
+            ? {}
+            : {
+                  fontSize: "calc(20rem * 0.6)",
+              };
 
     return (
-        <div className="flipping-text">
-            <div className="flipping-text-container">
+        <div className="flip-digit">
+            <div className="container">
                 <div className="line-through" />
-                <div className="next top">
-                    <span>{nextDigit}</span>
+                <div className="digit-container">
+                    <div className="next digit top">
+                        <div style={textStyle}>{digit}</div>
+                    </div>
+                    <div className="current digit bottom">
+                        <div style={textStyle}>{currentValue}</div>
+                    </div>
                 </div>
-                <div className="current bottom">
-                    <span>{currentValue}</span>
-                </div>
-                <div className={`current top ${hasAnimation ? "flip" : ""}`}>
-                    <span>{currentValue}</span>
-                </div>
-                <div className={`next bottom ${hasAnimation ? "flip" : ""}`} onAnimationEnd={onAnimationEnd}>
-                    <span>{nextDigit}</span>
+                <div className="digit-container animated">
+                    <div className={`current digit top ${isAnimating ? "animate" : ""}`}>
+                        <div style={textStyle}>{currentValue}</div>
+                    </div>
+                    <div
+                        onTransitionEnd={onTransitionEnd}
+                        className={`next digit bottom ${isAnimating ? "animate" : ""}`}
+                    >
+                        <div style={textStyle}>{digit}</div>
+                    </div>
                 </div>
             </div>
         </div>
